@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de temps de passage</title>
+    <script src="CTP_script.js"></script>
+    <link rel="stylesheet" href="CTP_style.css">
+    <link rel="stylesheet" href="modal_style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
+
+</head>
+
+<body>
+    <div class="title">Calculateur de temps de passage</div>
+    <br> 
+
+    <!-- ------     RACE INFO     ------- -->
+
+    <div class="raceInfoContainer">
+        <div class="form-group">
+          <label class="label" for="raceName">Course:</label>
+          <input class="larger-input" type="text" id="raceName" name="raceName">
+        </div>
+      
+        <div class="form-group">
+          <label class="sub-label" for="raceDate">Date:</label>
+          <div class="input-container">
+            <input class="input" type="date" id="raceDate" name="raceDate">
+            <label class="sub-label" for="startTime">Départ:</label>
+            <input class="input" type="text" id="startTime" name="startTime" placeholder='hh:mm' maxlength='5' onblur="formatTimeInput(this)">
+          </div>
+        </div>
+    </div>
+
+
+<!-- ------     RACE INFO 2    ------- -->
+<!--     <div class="right-container">
+        <div class="left-column">
+            <div class="distance-container">
+                <label for="distance">Distance</label>
+                <input type="text" id="distance" name="distance">
+            </div>
+            <div class="dplus-container">
+                <label for="d+">Dénivelé +</label>
+                <input type="text" id="d+" name="d+">
+            </div>
+            <div class="dminus-container">
+                <label for="d-">Dénivelé -</label>
+                <input type="text" id="d-" name="d-">
+            </div>
+            <div class="kme-container">
+                <label for="kme">Kilomètres-effort</label>
+                <input type="text" id="kme" name="kme">
+            </div>
+        <div class="right-column">
+            <div class="raceTime-container">
+                <label for="raceTime">Temps de course</label>
+                <input type="text" id="raceTime" name="raceTime">
+            </div>
+            <div class="stopTime-container">
+                <label for="stopTime">Temps de pause</label>
+                <input type="text" id="stopTime" name="stopTime">
+            </div>
+            <div class="totalTime-container">
+                <label for="totalTime">Temps total</label>
+                <input type="text" id="totalTime" name="totalTime">
+            </div>
+            <div class="arrivalTime-container">
+                <label for="arrivalTime">Heure d'arrivée</label>
+                <input type="text" id="arrivalTime" name="arrivalTime">
+            </div>
+        </div>
+    </div> -->
+
+    <br> 
+<!-- ------     INPUT TABLE     ------- -->
+    <div id="inputTableId" class="inputTableContainer">
+        <table id="inputTable">
+            <tr>
+                <th>Passage</th>
+                <th>Distance</th>
+                <th>Dénivelé positif</th>
+                <th>Dénivelé négatif</th>
+                <th>Type de ravito</th>
+                <th>Barriere horaire</th>
+                <th>Temps de pause</th>
+                <th>Vitesse</th>
+            </tr>
+            <tr>
+                <th> </th>
+                <th>cumulée</th>
+                <th>cumulé</th>
+                <th>cumulé</th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
+            </tr>
+        </table>
+    </div>
+    <div class="button-container">
+        <button class="button-with-tooltip add-icon-button material-icons" onclick="addLine('inputTable',empty);" data-tooltip="AJOUTER">add_circle</button>
+        <button class="button-with-tooltip open-icon-button material-icons" onclick="openModal('loadRace');" data-tooltip="CHARGER">format_list_bulleted_add</button>
+        <button class="button-with-tooltip save-icon-button material-icons" onclick="openModal('saveRace');" data-tooltip="SAUVER">save_as</button>
+        <button class="button-with-tooltip schedule-icon-button material-icons" onclick="createOutputTable('inputTable','resultTableContainer');" data-tooltip="CALCULER">schedule</button>
+    </div>
+
+<!-- alternative icons
+    
+export: shift_lock, unarchive, upload_file
+ouvrir: open_folder, format_list_bulleted_add, add_notes, file_open
+
+
+ -->
+
+<!-- ------     OUTPUT TABLE     ------- -->
+    <p id="message"></p>
+    <div id="resultTableContainer" class="outputTableContainer printable"></div>
+    <br>
+
+    <div class="button-container">
+        <button class="button-with-tooltip print-icon-button material-icons" id="printButton" onclick="printContent();" data-tooltip="IMPRIMER">print</button>
+        <button class="button-with-tooltip open-icon-button material-icons" id="exportButton" onclick="saveToCsv();"data-tooltip="EXPORTER">upload_file</button>
+        <button class="button-with-tooltip open-icon-button material-icons" id="analyseButton" onclick="openModal('analyseRace');" data-tooltip="ANALYSE">query_stats</button>
+    </div>
+
+<!-- ------     MODAL DIALOG     ------- -->
+
+    <div id="saveRace" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('saveRace')">&times;</span>
+            <div class="modal-heading">Enregistrer les points de passage</div>
+            <div class="modal-message">Attention en cas de doublon le précédent parcours sera écrasé</div>
+            <input class="modal-input" type="text" id="inputField" placeholder="nom du parcours">
+            <button onclick="addItem('saveRace', 'inputTable')">Sauver</button>
+        </div>
+    </div>
+
+    <div id="loadRace" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('loadRace')">&times;</span>
+            <div class="modal-heading">Ouvrir un fichier</div>
+            <select id="listbox"></select>
+            <button onclick="loadSelectedRace('loadRace')">Charger</button>
+            <button onclick="deleteSelectedRace('loadRace')">Supprimer</button>
+        </div>
+    </div>
+
+
+    <div id="analyseRace" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('analyseRace')">&times;</span>
+            <div class="modal-heading">Entrez les temps de passage</div>
+          <form id="analyseForm"></form>
+          <button onclick="analyseRaceTime('analyseRace')">Analyser</button>
+        </div>
+      </div>
+
+<!-- ------     FOOTER     ------- -->
+    <footer>
+        <p>&copy; 2023 Mountain-geek.com - All rights reserved.</p>
+      </footer>
+</body>
+</html>

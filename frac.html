@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de fractionné</title>
+    <script src="frac_script.js"></script>
+    <link rel="stylesheet" href="frac_style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Icons">
+
+</head>
+
+<body>
+    <div class="title">Calculateur de fractionné</div>
+   
+
+
+    <div class="vmaContainer">
+        <div class="form-group">
+          <label class="label" for="myVMA">VMA:</label>
+          <input class="smaller-input" type="text" id="myVMA" name="myVMA" maxlength="4">
+          <button class="button-with-tooltip schedule-icon-button material-icons" id="goButton" onclick="calculateLapTimes();">published_with_changes</button>
+        
+        </div>
+    </div>
+
+
+
+<!-- ------     Pyramid 1     ------- -->
+    <div class="Table-Container">
+        <table id="pyramid1" class="Pyramid-Table"> 
+            <caption>Pyramide 8-12-16</caption>
+            <thead>
+                <tr>
+                    <th rowspan="2" class="TopLeft"></th>
+                    <th rowspan="2">Distance</th>
+                    <th rowspan="2">%VMA</th>
+                    <th colspan="4">Tours</th>
+                </tr>
+                <tr>
+                    <th>Tour 1</th>
+                    <th>Tour 2</th>
+                    <th>Tour 3</th>
+                    <th>Tour 4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Série 1</th>
+                    <td>800</td>
+                    <td>90</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Série 2</th>
+                    <td>1200</td>
+                    <td>85</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Série 3</th>
+                    <td>1600</td>
+                    <td>80</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Série 4</th>
+                    <td>1200</td>
+                    <td>85</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Série 5</th>
+                    <td>800</td>
+                    <td>90</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="button-container">
+        <button class="button-with-tooltip print-icon-button material-icons" id="printButton1" onclick="printContent();" data-tooltip="IMPRIMER">print</button>
+    </div>
+
+    <!-- ------     Pyramid 2     ------- -->
+    <div class="Table-Container">
+        <table id="pyramid2" class="Pyramid-Table"> 
+            <caption>Pyramide 8-16-24</caption>
+            <thead>
+                <tr>
+                    <th rowspan="2" class="TopLeft"></th>
+                    <th rowspan="2">Distance</th>
+                    <th rowspan="2">%VMA</th>
+                    <th colspan="6">Tours</th>
+                </tr>
+                <tr>
+                    <th>Tour 1</th>
+                    <th>Tour 2</th>
+                    <th>Tour 3</th>
+                    <th>Tour 4</th>
+                    <th>Tour 5</th>
+                    <th>Tour 6</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Série 1</th>
+                    <td>800</td>
+                    <td>90</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Série 2</th>
+                    <td>1600</td>
+                    <td>85</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Série 3</th>
+                    <td>2400</td>
+                    <td>80</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Série 4</th>
+                    <td>1600</td>
+                    <td>85</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>Série 5</th>
+                    <td>800</td>
+                    <td>90</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="button-container">
+        <button class="button-with-tooltip print-icon-button material-icons" id="printButton2" onclick="printContent();" data-tooltip="IMPRIMER">print</button>
+    </div>
+
+
+<!-- ------     FOOTER     ------- -->
+    <footer>
+        <p>&copy; 2023 Mountain-geek.com - All rights reserved.</p>
+      </footer>
+</body>
+</html>
